@@ -11,34 +11,45 @@ const BookSingleCard = ({ book }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className='border-2 border-gray-500 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl'>
-      <h2 className='absolute top-1 right-2 px-4 py-1 bg-red-300 rounded-lg'>
+    <div className='border border-gray-300 rounded-xl p-5 m-4 relative shadow-sm hover:shadow-lg transition-shadow'>
+      {/* Year badge */}
+      <h2 className='absolute top-2 right-2 bg-red-200 text-red-800 px-3 py-1 text-sm rounded-full shadow'>
         {book.publishYear}
       </h2>
-      <h4 className='my-2 text-gray-500'>{book._id}</h4>
-      <div className='flex justify-start items-center gap-x-2'>
-        <PiBookOpenTextLight className='text-red-300 text-2xl' />
-        <h2 className='my-1'>{book.title}</h2>
+
+      {/* Book ID */}
+      <p className='text-xs text-gray-400 mb-2 break-all'>{book._id}</p>
+
+      {/* Title */}
+      <div className='flex items-center gap-2 mb-1'>
+        <PiBookOpenTextLight className='text-red-400 text-xl' />
+        <h3 className='text-lg font-semibold text-gray-800'>{book.title}</h3>
       </div>
-      <div className='flex justify-start items-center gap-x-2'>
-        <BiUserCircle className='text-red-300 text-2xl' />
-        <h2 className='my-1'>{book.author}</h2>
+
+      {/* Author */}
+      <div className='flex items-center gap-2'>
+        <BiUserCircle className='text-red-400 text-xl' />
+        <p className='text-gray-700'>{book.author}</p>
       </div>
-      <div className='flex justify-between items-center gap-x-2 mt-4 p-4'>
+
+      {/* Action Icons */}
+      <div className='flex justify-between items-center mt-6 px-3'>
         <BiShow
-          className='text-3xl text-blue-800 hover:text-black cursor-pointer'
+          className='text-2xl text-blue-700 hover:text-blue-900 cursor-pointer transition-colors'
           onClick={() => setShowModal(true)}
         />
         <Link to={`/books/details/${book._id}`}>
-          <BsInfoCircle className='text-2xl text-green-800 hover:text-black' />
+          <BsInfoCircle className='text-xl text-green-700 hover:text-green-900 transition-colors' />
         </Link>
         <Link to={`/books/edit/${book._id}`}>
-          <AiOutlineEdit className='text-2xl text-yellow-600 hover:text-black' />
+          <AiOutlineEdit className='text-xl text-yellow-600 hover:text-yellow-800 transition-colors' />
         </Link>
         <Link to={`/books/delete/${book._id}`}>
-          <MdOutlineDelete className='text-2xl text-red-600 hover:text-black' />
+          <MdOutlineDelete className='text-xl text-red-600 hover:text-red-800 transition-colors' />
         </Link>
       </div>
+
+      {/* Modal */}
       {showModal && (
         <BookModal book={book} onClose={() => setShowModal(false)} />
       )}
